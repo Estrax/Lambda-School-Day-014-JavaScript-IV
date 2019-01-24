@@ -26,9 +26,9 @@ Prototype Refactor
 */
 
 class GameObject{
-    constructor({createdAt, dimensions}){
-        this.createdAt = createdAt.toString();
-	    this.dimensions = dimensions;
+    constructor(attributes){
+        this.createdAt = attributes.createdAt.toString();
+	    this.dimensions = attributes.dimensions;
     }
 
     destroy(){
@@ -45,10 +45,10 @@ class GameObject{
 */
 
 class CharacterStats extends GameObject{
-    constructor({createdAt, dimensions, healthPoints, name}){
-        super({createdAt, dimensions});
-        this.healthPoints = healthPoints;
-        this.name = name;
+    constructor(attributes){
+        super(attributes);
+        this.healthPoints = attributes.healthPoints;
+        this.name = attributes.name;
     }
 
     takeDamage(){
@@ -67,11 +67,11 @@ class CharacterStats extends GameObject{
 */
 
 class Humanoid extends CharacterStats{
-    constructor({createdAt, dimensions, healthPoints, name, team, weapons, language}){
-        super({createdAt, dimensions, healthPoints, name});
-        this.team = team;
-        this.weapons = weapons.toString(); // because console.log(object.weapons); returns a string as the example output in the line 133.
-        this.language = language;
+    constructor(attributes){
+        super(attributes);
+        this.team = attributes.team;
+        this.weapons = attributes.weapons.toString(); // because console.log(object.weapons); returns a string as the example output in the line 133.
+        this.language = attributes.language;
     }
 
     greet(){
@@ -161,8 +161,8 @@ console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 // * Create two new objects, one a villain and one a hero and fight it out with methods!
 
 class Villain extends Humanoid{
-    constructor({createdAt, dimensions, healthPoints, name, team, weapons, language}){
-        super({createdAt, dimensions, healthPoints, name, team, weapons, language});
+    constructor(attributes){
+        super(attributes);
     }
 
     kickOpponent(opponent){
@@ -175,8 +175,8 @@ class Villain extends Humanoid{
 };
 
 class Hero extends Humanoid{
-    constructor({createdAt, dimensions, healthPoints, name, team, weapons, language}){
-        super({createdAt, dimensions, healthPoints, name, team, weapons, language});
+    constructor(attributes){
+        super(attributes);
     }
 
     hitOpponent(opponent){
