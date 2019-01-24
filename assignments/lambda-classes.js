@@ -28,6 +28,10 @@ class Instructor extends Person{
     grade(student, subject){
         console.log(`${student.name} receives a perfect score on ${subject}`);
     }
+
+    changeGrade(student){
+        return student.grade += Math.floor(Math.random()*(5-(-5))+5);
+    }
 };
 
 class Student extends Person{
@@ -36,6 +40,7 @@ class Student extends Person{
         this.previousBackground = attributes.previousBackground;
         this.className = attributes.className;
         this.favSubjects = attributes.favSubjects;
+        this.grade = attributes.grade;
     }
 
     listsSubjects(){
@@ -48,6 +53,14 @@ class Student extends Person{
 
     sprintChallenge(subject){
         console.log(`${this.name} has begun sprint challenge on ${subject}`);
+    }
+
+    graduate(instructor){
+        if(this.grade > 70) console.log(`${this.name} has graduated!`);
+        else {
+            console.log(`${this.name} needs to study more, because the current score is ${this.grade}.`);
+            return instructor.changeGrade(this) && this.graduate(instructor);
+        }
     }
 };
 
@@ -109,7 +122,8 @@ const david = new Student({
     gender: 'male',
     previousBackground: 'waiter',
     className: 'CS01',
-    favSubjects: ['HTML5', 'CSS3', 'Algorithms and Data Structures'] 
+    favSubjects: ['HTML5', 'CSS3', 'Algorithms and Data Structures'],
+    grade: 59
 });
 
 const susan = new Student({
@@ -119,7 +133,8 @@ const susan = new Student({
     gender: 'female',
     previousBackground: 'business development manager',
     className: 'CS06',
-    favSubjects: ['Algorithms and Data Structures', 'Python'] 
+    favSubjects: ['Algorithms and Data Structures', 'Python'],
+    grade: 62
 });
 
 const karen = new Student({
@@ -129,7 +144,8 @@ const karen = new Student({
     gender: 'female',
     previousBackground: 'marketing manager',
     className: 'DS705',
-    favSubjects: ['Descriptive statistics', 'Python', 'Reinforcement Learning', 'Natural Language Processing'] 
+    favSubjects: ['Descriptive statistics', 'Python', 'Reinforcement Learning', 'Natural Language Processing'],
+    grade: 43
 });
 
 console.log(david);
@@ -181,9 +197,13 @@ fred.demo('JavaScript');
 brad.demo('Django');
 brad.demo('Authentication');
 ryan.demo('Unsupervised Learning');
-ryan.grade(david);
-brad.grade(karen);
-fred.grade(susan);
+ryan.grade(david, 'Advanced CSS');
+brad.grade(karen, 'Introduction to Distributed Systems');
+fred.grade(susan, 'Deep Learning');
+
+console.log(susan.grade);
+fred.changeGrade(susan);
+console.log(susan.grade);
 
 /* PROJECT MANAGER CLASS */
 
@@ -212,8 +232,18 @@ const james = new ProjectManager({
 });
 
 console.log(lisa);
+lisa.speak();
 console.log(james);
 lisa.standUp('WEB17');
 james.standUp('CS999');
 lisa.debugsCode(susan, 'Advanced README.md');
 james.debugsCode(karen, 'Natural Language Understanding');
+james.demo('JavaScript');
+lisa.demo('Django');
+james.demo('Authentication');
+james.demo('Unsupervised Learning');
+lisa.grade(david, 'CSS Animations');
+james.grade(karen, 'API Design');
+james.grade(susan, 'Databases');
+
+karen.graduate(fred);
