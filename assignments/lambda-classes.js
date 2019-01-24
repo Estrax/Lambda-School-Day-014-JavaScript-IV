@@ -29,3 +29,25 @@ class Instructor extends Person{
         console.log(`${student.name} receives a perfect score on ${subject}`);
     }
 };
+
+class Student extends Person{
+    constructor(attributes){
+        super(attributes);
+        this.previousBackground = attributes.previousBackground;
+        this.className = attributes.className;
+        this.favSubjects = attributes.favSubjects;
+    }
+
+    listsSubjects(){
+        this.favSubjects.forEach(elem => console.log(elem));
+    }
+
+    PRAssignment(subject){
+        console.log(`${this.name} has submitted a PR for ${subject}`);
+    }
+
+    sprintChallenge(subject){
+        console.log(`${this.name} has begun sprint challenge on ${subject}`);
+    }
+};
+
