@@ -30,7 +30,10 @@ class Instructor extends Person{
     }
 
     changeGrade(student){
-        return student.grade += Math.floor(Math.random()*(5-(-5))+5);
+        student.grade += Math.floor(Math.random()*(5-(-5))+5);
+        if(student.grade < 1) student.grade = 1;
+        if(student.grade > 100) student.grade = 100;
+        return student.grade;
     }
 };
 
@@ -151,6 +154,8 @@ const karen = new Student({
 console.log(david);
 console.log(susan);
 console.log(karen);
+susan.speak();
+karen.speak();
 david.listsSubjects();
 susan.listsSubjects();
 karen.PRAssignment('Python');
@@ -193,6 +198,8 @@ const ryan = new Instructor({
 console.log(fred);
 console.log(brad);
 console.log(ryan);
+ryan.speak();
+brad.speak();
 fred.demo('JavaScript');
 brad.demo('Django');
 brad.demo('Authentication');
@@ -234,6 +241,7 @@ const james = new ProjectManager({
 console.log(lisa);
 lisa.speak();
 console.log(james);
+james.speak();
 lisa.standUp('WEB17');
 james.standUp('CS999');
 lisa.debugsCode(susan, 'Advanced README.md');
