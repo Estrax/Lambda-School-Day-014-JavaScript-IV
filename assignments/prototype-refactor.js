@@ -172,7 +172,7 @@ class Villain extends Humanoid{
         if(opponent.healthPoints>0) return opponent.takeDamage();
         return this.killOpponent(opponent);
     }
-}
+};
 
 class Hero extends Humanoid{
     constructor({createdAt, dimensions, healthPoints, name, team, weapons, language}){
@@ -186,7 +186,7 @@ class Hero extends Humanoid{
         if(opponent.healthPoints>0) return opponent.takeDamage();
         return this.killOpponent(opponent);
     }
-}
+};
 
 class Game{
     constructor(players = [], currentPlayer = -1){
@@ -197,7 +197,7 @@ class Game{
     checkIfFinished(){
         return this.players.map(player => player.healthPoints).reduce((acc, elem) => acc+=(elem>0 ? 1 : 0),0)==1;
     }
-}
+};
 
 (() => {
     console.log("Let's play!");
